@@ -18,7 +18,7 @@ let x, y;
 let dist = 0;
 
 function preload() {
-  charImg = loadImage('asset/char/char.gif');
+  charImg = createImg('asset/char/char.gif');
   bImg = loadImage('asset/subject/English.png');
   bImg1 = loadImage('asset/subject/Math.png');
   bImg2 = loadImage('asset/subject/Science.png');
@@ -112,10 +112,10 @@ function description() {
   textSize(20);
   text("Statement: ", 50, 500);
   textSize(20);
-  text("The concept of this game is to avoid getting hit by the books and book shelf.", 50, 540);
-  text("The books and bookshelf are represent the workflow we need to overment in order to graduate.", 50, 570);
-  text("The idea of having the flashing background is experiment of making eyes feel tired", 50, 600);
-  text("just like our eyes are tired after staring at the digital device and books all day long.", 50, 630);
+  text("The concept of this game is to avoid getting hit by books and bookshelves.", 50, 540);
+  text("The books and bookshelvess represented the workflow that we have to overcome in order to graduate.", 50, 570);
+  text("The idea of having the flashing background is an experiment of making eyes feel tired", 50, 600);
+  text("just like our eyes get tired after staring at the digital devices and books all day long.", 50, 630);
   fill(random(0, 200), 150);
   textSize(40);
   text("~Click~ to continue", 600, 700);
