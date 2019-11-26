@@ -119,7 +119,7 @@ function descriptionClicked() {
 }
 
 function game() {
-  background (100, 200, 255);
+  background (random(0, 255), 100);
   fill(100, 50, 30);
   rect(0, 745, 1030, 50);
 
@@ -152,15 +152,6 @@ function pause() {
   //pause the game
 }
 
-// class game {
-//   //energy measure top right/left
-//   //distance count value
-//   //character controls
-//   //background
-//   //blocks
-//   //
-// }
-
 function eTracker() {
   //energy set as 100
   //decrease if character touch blocks
@@ -182,7 +173,7 @@ function distance() {
   text('Distance: ', 20, 40);
 }
 
-function displayGameOver() {
+function gameOver() {
   //code when energy (100) reach 0
   //display gameover center screen
 }
@@ -193,11 +184,6 @@ function win() {
   //display winning music
   //display text "You Successfully Graudate"
 }
-
-// class item {
-//   //a sketch / picture of drink
-//   //display in the game page
-// }
 
 function keyPressed() {
   if (key == " ") {
