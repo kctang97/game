@@ -18,6 +18,12 @@ class Char {
     } else if (keyIsDown(65)) {
       this.x -= 5;
     }
+    if (this.x <= 0) {
+      this.x ++;
+    }
+    if (this.x >= width) {
+      this.x--;
+    }
     this.y += this.v;
     this.v += this.g;
     this.y = constrain(this.y, 0, height - this.r);

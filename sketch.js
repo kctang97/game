@@ -91,6 +91,8 @@ function description() {
   //control
   textSize(30);
   text("|        Space       | : Jump", 50, 350);
+  text("|  A  | : Move Left", 50, 400);
+  text("|  D  | : Move Right", 50, 450);
   //books
   image(bImg, 500, 110, 100, 100);
   fill(0);
