@@ -7,25 +7,46 @@
 // declare variables for:
 // game state
 // energy measurement
+let char;
+let state = 'titlePage';
+let cnv;
+let charImg;
+let bImg, bImg1, bImg2, bImg3, bImg4;
+let cloud;
+let subjects = [];
+let dist = 0;
 
 function preload() {
-  //background
-  //character
-  //blocks
-  //items
-  //background music
+  charImg = loadImage('asset/char/char.gif');
+  bImg = loadImage('asset/subject/English.png');
+  bImg1 = loadImage('asset/subject/Math.png');
+  bImg2 = loadImage('asset/subject/Science.png');
+  bImg3 = loadImage('asset/subject/History.png');
+  bImg4 = loadImage('asset/subject/bookshelf.png');
+  cloud = loadImage('asset/subject/cloud.png');
 }
 
 function setup() {
-  createCanvas(1024, 760);
-
+  cnv = createCanvas(1024, 760);
+  char = new Char();
 }
 
 function draw() {
-  displayTitlePage();
-
-  //start with title page
-  //controls in title page function
+  switch (state) {
+    case 'titlePage':
+      titlePage();
+      cnv.mouseClicked(titleClicked);
+      break;
+    case 'description':
+      description();
+      cnv.mouseClicked(descriptionClicked);
+      break;
+    case 'game':
+      game();
+      break;
+    default:
+      break;
+  }
 
   //description page function
   //display character, items, controls
@@ -40,8 +61,8 @@ function draw() {
   //if reach 1000km execute you won function
 }
 
-function displayTitlePage(){
-  background(random(150, 200),random(150, 200),random(150, 200), 20);
+function titlePage(){
+  background(random(150, 200),random(150, 200),random(150, 200), 30);
   fill(200, 0, 0);
   textStyle(BOLD);
   textSize(120);
@@ -49,21 +70,83 @@ function displayTitlePage(){
   fill(random(50, 100), 0, 0, 20);
   textSize(125);
   text("Give It A Try", 160, 250);
-
-  fill(random(0, 200), 30);
+  fill(random(0, 200), 50);
   textSize(40);
-  text("~Enter~ to Start", 350, 600);
+  text("~Click~ to Start", 350, 600);
 
 }
 
+function titleClicked() {
+    state = 'description';
+}
 function description() {
-  background(200, 0, 0);
+  background(150, 0, 0);
+  //character
+  image(charImg, 50, 100, 150, 150);
+  fill(0);
+  textSize(30);
+  text(" * Student *", 200, 190);
+  //books
+  image(bImg, 450, 100, 150, 150);
+  fill(0);
+  textSize(30);
+  text(" * English Book *", 600, 190);
+
+  image(bImg1, 450, 220, 150, 150);
+  fill(0);
+  textSize(30);
+  text(" * Math Book *", 600, 300);
+
+  image(bImg4, 450, 400, 150, 150);
+  fill(0);
+  textSize(30);
+  text(" * School Works *", 600, 450);
+
+  fill(random(0, 200), 150);
+  textSize(40);
+  text("~Click~ to continue", 600, 700);
   //a image
   //display from upper left
   //display character
   //display items
   //display controls
   //display winning description
+}
+
+function descriptionClicked() {
+  state = 'game';
+}
+
+function game() {
+  background (100, 200, 255);
+  fill(100, 50, 30);
+  rect(0, 745, 1030, 50);
+
+  //cloud
+  image(cloud, 200, 200, 100, 100);
+  image(cloud, 100, 50, 200, 200);
+  image(cloud, 400, 50, 100, 100);
+  image(cloud, 500, 100, 150, 100);
+  image(cloud, 700, 100, 100, 100);
+  image(cloud, 900, 50, 300, 300);
+
+  //blocks / books
+  if (random(1) <= 0.01) {
+    subjects.push(new Subject());
+  }
+  for (let s of subjects) {
+    s.move();
+    s.show();
+  }
+  //character
+
+  char.show();
+  char.move();
+
+  //distance
+  textSize(25);
+  fill(0);
+  text('Distance:', 20, 40);
 }
 
 function pause() {
@@ -90,10 +173,7 @@ function eTracker() {
 }
 
 function distance() {
-  //count distance start with 0
-  //total up 1000km
-  // display "Goal"
-  //execute winner text
+  
 }
 
 function displayGameOver() {
@@ -114,14 +194,7 @@ function win() {
 // }
 
 function keyPressed() {
-  if (key == ENTER) {
-    //show desciption page
-  } else {
-    //nothing happen
-  }
-  if (key === RIGHT_ARROW) {
-    //game start
-  } else {
-    //nothing happen
+  if (key == " ") {
+    char.jump();
   }
 }
