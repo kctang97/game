@@ -20,8 +20,8 @@ class Char {
     }
     if (this.x <= 0) {
       this.x += 5;
-    } else if (this.x >= width / 0.5) {
-      this.x-= 6;
+    } else if (this.x >= width - 100) {
+      this.x-= 10;
     }
     this.y += this.v;
     this.v += this.g;

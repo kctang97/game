@@ -83,41 +83,44 @@ function titleClicked() {
 function description() {
   background(150, 0, 0);
   //character
-  image(charImg, 90, 100, 150, 150);
+  image(charImg, 40, 100, 150, 150);
   fill(0);
   textSize(30);
-  text(" * Student *", 200, 190);
+  text(" * Student *", 180, 190);
 
   //control
   textSize(30);
-  text("|        Space       | : Jump", 50, 350);
-  text("|  A  | : Move Left", 50, 400);
-  text("|  D  | : Move Right", 50, 450);
+  text("|        Space       | : Jump", 90, 310);
+  text("|  A  | : Move Left", 90, 350);
+  text("|  D  | : Move Right", 90, 390);
   //books
   image(bImg, 500, 110, 100, 100);
   fill(0);
   textSize(30);
-  text(" * English Book *", 600, 190);
+  text(" * English Book *", 600, 170);
 
-  image(bImg1, 500, 230, 100, 100);
+  image(bImg1, 500, 200, 100, 100);
   fill(0);
   textSize(30);
-  text(" * Math Book *", 600, 300);
+  text(" * Math Book *", 600, 260);
 
-  image(bImg4, 500, 410, 100, 100);
+  image(bImg4, 500, 320, 100, 100);
   fill(0);
   textSize(30);
-  text(" * School Works *", 600, 450);
+  text(" * School Works *", 600, 370);
 
+  textSize(20);
+  text("Statement: ", 50, 500);
+  textSize(20);
+  text("The concept of this game is to avoid getting hit by the books and book shelf.", 50, 540);
+  text("The books and bookshelf are represent the workflow we need to overment in order to graduate.", 50, 570);
+  text("The idea of having the flashing background is experiment of making eyes feel tired", 50, 600);
+  text("just like our eyes are tired after staring at the digital device and books all day long.", 50, 630);
   fill(random(0, 200), 150);
   textSize(40);
   text("~Click~ to continue", 600, 700);
-  //a image
-  //display from upper left
-  //display character
-  //display items
-  //display controls
-  //display winning description
+
+
 }
 
 function descriptionClicked() {
