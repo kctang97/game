@@ -14,6 +14,7 @@ let charImg;
 let bImg, bImg1, bImg2, bImg3, bImg4;
 let cloud;
 let subjects = [];
+let x, y;
 let dist = 0;
 
 function preload() {
@@ -82,22 +83,22 @@ function titleClicked() {
 function description() {
   background(150, 0, 0);
   //character
-  image(charImg, 50, 100, 150, 150);
+  image(charImg, 90, 100, 150, 150);
   fill(0);
   textSize(30);
   text(" * Student *", 200, 190);
   //books
-  image(bImg, 450, 100, 150, 150);
+  image(bImg, 500, 110, 100, 100);
   fill(0);
   textSize(30);
   text(" * English Book *", 600, 190);
 
-  image(bImg1, 450, 220, 150, 150);
+  image(bImg1, 500, 230, 100, 100);
   fill(0);
   textSize(30);
   text(" * Math Book *", 600, 300);
 
-  image(bImg4, 450, 400, 150, 150);
+  image(bImg4, 500, 410, 100, 100);
   fill(0);
   textSize(30);
   text(" * School Works *", 600, 450);
@@ -144,9 +145,7 @@ function game() {
   char.move();
 
   //distance
-  textSize(25);
-  fill(0);
-  text('Distance:', 20, 40);
+  distance();
 }
 
 function pause() {
@@ -172,8 +171,15 @@ function eTracker() {
   //energy increase +5, 100 as limit
 }
 
+function c() {
+  cloud = 0;
+  image(cloud, 200, 50, 100, 100);
+  cloud += 1;
+}
 function distance() {
-  
+  textSize(25);
+  fill(0);
+  text('Distance: ', 20, 40);
 }
 
 function displayGameOver() {
