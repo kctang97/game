@@ -87,6 +87,10 @@ function description() {
   fill(0);
   textSize(30);
   text(" * Student *", 200, 190);
+
+  //control
+  textSize(30);
+  text("|        Space       | : Jump", 50, 350);
   //books
   image(bImg, 500, 110, 100, 100);
   fill(0);
@@ -174,8 +178,7 @@ function distance() {
 }
 
 function gameOver() {
-  //code when energy (100) reach 0
-  //display gameover center screen
+  //hit the book for certain amount
 }
 
 function win() {

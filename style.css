@@ -14,7 +14,7 @@ body {
 /* sets canvas to be aligned to top right of screen
 position absolute will stop it from scrolling */
 canvas {
-  margin-left: 25%;
+  margin-left: 20%;
   /* uncomment next line to position the canvas BEHIND the HTML */
   /* z-index: -1; */
 }
