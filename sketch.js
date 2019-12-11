@@ -3,7 +3,7 @@
 let char, charImg, graduate;
 let state = 'titlePage';
 let cnv;
-let books1, books3, dpls, city;
+let books0, books1, dpls, city;
 let cloud, bg;
 let book1 = [];
 let book2 = [];
@@ -32,8 +32,9 @@ function preload() {
   city = loadImage('asset/bg/city.png');
   charImg = createImg('asset/char/char.gif');
   graduate = loadImage('asset/char/graduate.png');
-  books1 = loadImage('asset/subject/book1.png');
-  books3 = loadImage('asset/subject/book3.png');
+  books1 = loadImage('asset/subject/book.png');
+  books0 = loadImage('asset/subject/book0.png');
+
   cloud = loadImage('asset/subject/cloud1.png');
   dpls = loadImage('asset/subject/diploma.png');
   bg = loadImage('asset/bg/road.png');
@@ -173,12 +174,12 @@ function description() {
   image(books1, 500, 90, 150, 150);
   fill(0);
   textSize(30);
-  text(" * English Book *", 630, 170);
+  text(" * Education *", 630, 170);
 
-  image(books3, 500, 190, 150, 150);
+  image(books0, 500, 230, 150, 150);
   fill(0);
   textSize(30);
-  text(" * Math Book *", 630, 280);
+  text(" * Workload *", 630, 300);
 
   //statement
   textSize(20);
@@ -323,5 +324,8 @@ function win() {
   textStyle(BOLD);
   textSize(120);
   text("Congratulation !", 80, 240);
+  textSize(20);
+  fill(random(100, 255));
+  text("ENTER", 950, 750);
   image(graduate, 300, 300);
 }

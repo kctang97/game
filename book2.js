@@ -1,6 +1,6 @@
 class Book2 {
   constructor() {
-    this.r = 70;
+    this.r = 80;
     this.x = w;
     this.y = h - this.r;
     this.speed = random(5, 10);
@@ -10,6 +10,6 @@ class Book2 {
     this.x -= this.speed;
   }
   show() {
-    image(books3, this.x, this.y, this.r, this.r);
+    image(books0, this.x, this.y, this.r, this.r);
   }
 }
