@@ -3,7 +3,7 @@ class Diploma {
       this.r = 60;
       this.x = random(w);
       this.y = 0 - this.r;
-      this.speed = 10;
+      this.speed = 5;
       this.image = dpls;
         // this.speed = 15;
     }

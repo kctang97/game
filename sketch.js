@@ -12,7 +12,7 @@ let state = 'titlePage';
 let cnv;
 let books = [];
 let books0, books1, books2, books3, books4, dpls;
-let cloud;
+let cloud, bg;
 let book1 = [];
 let book2 = [];
 let lf = 0;
@@ -40,6 +40,7 @@ function preload() {
   books0 = loadImage('asset/subject/book0.png');
   cloud = loadImage('asset/subject/cloud1.png');
   dpls = loadImage('asset/subject/diploma.png');
+  bg = loadImage('asset/bg/road.png');
 }
 
 function setup() {
@@ -73,6 +74,10 @@ function draw() {
       if (key == 'r') {
         state = 'titlePage';
       }
+      cnv.mouseClicked(function(){
+        state = 'titlePage';
+      });
+
       gameOver();
       break;
     case 'win':
@@ -180,8 +185,7 @@ function description() {
 function game() {
   background (80, 130, random(100, 255), 70);
   fill(100, 50, 30);
-  rect(0, 745, 1030, 50);
-  dpa();
+  road();
   c();
 
 
@@ -224,6 +228,21 @@ function game() {
 
 }
 
+function road() {
+  image(bg, lf, 0, w, h);
+  image(bg, rt, 0, w, h);
+
+  lf -= cSpeed;
+  rt -= cSpeed;
+
+  if(lf < -w) {
+    lf = w;
+  }
+  if(rt < -w) {
+    rt = w;
+  }
+}
+
 function c() {
   //cloud
   image(cloud, lf, 0, w, h);
@@ -246,7 +265,7 @@ function dpa() {
   text(`Dipolmas: ${points}`, 20, 40);
 
   // //verticle diplomas
-  if (random(1) <= 0.004) {
+  if (random(1) <= 0.002) {
     diplomas.push(new Diploma());
   }
   for (let i = 0; i < diplomas.length; i++) {
