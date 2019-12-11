@@ -16,12 +16,13 @@ let w = 1024;
 let h = 760;
 let diplomas = [];
 let points = 0;
-let jump, ps, die, congrat, ms;
+let jump, ps, die, congrat;
+// let ms;
 
 function preload() {
   //sound
   soundFormats('mp3', 'ogg');
-  ms = loadSound("asset/sound/titlemus.mp3");
+  // ms = loadSound("asset/sound/titlemus.mp3");
   jump = loadSound("asset/sound/jump.mp3");
   ps = loadSound("asset/sound/point.mp3");
   die = loadSound("asset/sound/die.mp3");
@@ -50,7 +51,7 @@ function draw() {
       titlePage();
       cnv.mouseClicked(function(){
         state = 'description';
-        ms.stop();
+        // ms.stop();
       });
       break;
     case 'description':
@@ -88,15 +89,15 @@ function draw() {
   }
 }
 
-function loaded(){
-  ms.play();
-}
+// function loaded(){
+//   ms.play();
+// }
 
 function keyPressed() {
   switch (state) {
     case 'titlePage':
       if (keyCode === ENTER) {
-        ms.stop();
+        // ms.stop();
         state = 'description';
       }
       break;
