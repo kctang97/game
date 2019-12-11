@@ -13,14 +13,17 @@ let cnv;
 let books = [];
 let books0, books1, books2, books3, books4;
 let cloud;
-let subjects = [];
+let book1 = [];
+let book2 = [];
 let lf = 0;
 let rt;
 let cSpeed = 0.5;
 let w = 1024;
 let h = 760;
-let diplomas;
-let life = 3;
+let diplomas = [];
+// let life = 3;
+
+// let descKeyRelease = false;
 
 function preload() {
   //display 1 random book from the list
@@ -47,17 +50,16 @@ function draw() {
   switch (state) {
     case 'titlePage':
       titlePage();
-      cnv.mouseClicked(titleClicked);
-      if (keyCode === ENTER) {
-        titleClicked();
-      }
+      cnv.mouseClicked(function(){
+        state = 'description';
+      });
       break;
     case 'description':
       description();
-      cnv.mouseClicked(descriptionClicked);
-      if (keyCode === ENTER) {
-        descriptionClicked();
-      }
+      cnv.mouseClicked(function(){
+        state = 'game';
+      });
+
       break;
     case 'game':
       game();
@@ -70,9 +72,34 @@ function draw() {
   }
 }
 
-// function main() {
-//
-// }
+function keyPressed() {
+  switch (state) {
+    case 'titlePage':
+      if (keyCode === ENTER) {
+        state = 'description';
+      }
+      break;
+    case 'description':
+      if (keyCode === ENTER) {
+        state = 'game';
+      }
+      break;
+    case 'game':
+      if (key == " ") {
+        char.jump();
+      }
+      break;
+    case 'game over':
+      book1 = [];
+      book2 = [];
+      if (key == 'r') {
+        state = 'titlePage';
+      }
+      break;
+    default:
+      break;
+  }
+}
 
 function titlePage(){
 
@@ -90,10 +117,6 @@ function titlePage(){
   textSize(40);
   text("~Enter or Click~ to Start", 270, 600);
 
-}
-
-function titleClicked() {
-    state = 'description';
 }
 
 function description() {
@@ -135,52 +158,65 @@ function description() {
   //epilepsy
   fill(random(0, 200), 150);
   textSize(32);
-  text("~Enter Click~ to Continue", 600, 720);
-}
-
-function descriptionClicked() {
-  state = 'game';
+  text("~Enter or Click~ to Continue", 600, 720);
 }
 
 function game() {
   background (80, 130, random(100, 255), 70);
   fill(100, 50, 30);
   rect(0, 745, 1030, 50);
+  dpa();
   c();
+
+
   //blocks / books
   if (random(1) <= 0.01) {
     // let rbooks = floor(random(0, books.length));
-    subjects.push(new Subject());
+    book1.push(new Book1());
   }
-
-  // for (let s of subjects) {
-  //   s.move();
-  //   s.show();
-  // }
-  for (let i = 0; i < subjects.length; i++) {
-    subjects[i].show();
-    subjects[i].move();
-
+  //horizontal book1
+  for (let i = 0; i < book1.length; i++) {
+    book1[i].show();
+    book1[i].move();
   }
-  //
-  // subjects.forEach(function(s){
-  //   s.show();
-  //   s.move();
-  // })
-
-  for (let i = subjects.length - 1; i >= 0; i--){
-    if(dist(char.x, char.y, subjects[i].x, subjects[i].y) <= (char.r + subjects[i].r) / 3) {
+  for (let i = book1.length - 1; i >= 0; i--){
+    if(dist(char.x, char.y, book1[i].x, book1[i].y) <= (char.r + book1[i].r) / 3) {
       state = 'game over';
-      // gameOver();
-      // noLoop();
     }
   }
-
+ //book2
+  if (random(1) <= 0.002) {
+    // let rbooks = floor(random(0, books.length));
+    book1.push(new Book2());
+  }
+  for (let i = 0; i < book2.length; i++) {
+    book2[i].show();
+    book2[i].move();
+  }
+  for (let i = book2.length - 1; i >= 0; i--){
+    if(dist(char.x, char.y, book2[i].x, book2[i].y) <= (char.r + book2[i].r) / 3) {
+      state = 'game over';
+    }
+  }
+  // //verticle diplomas
+  if (random(1) <= 0.004) {
+    diplomas.push(new Diploma());
+  }
+  for (let i = 0; i < diplomas.length; i++) {
+    diplomas[i].move();
+    diplomas[i].display();
+  }
+  for (let i = diplomas.length - 1; i >= 0; i--){
+    if(dist(char.x, char.y, diplomas[i].x, diplomas[i].y) <= (char.r + diplomas[i].r) / 2) {
+      diplomas++;
+      diplomas.splice(i, 1);
+    }
+  }
   //character
   char.show();
   char.move();
   //distance
-  diploma();
+
 }
 
 function pause() {
@@ -203,15 +239,11 @@ function c() {
   }
 }
 
-function diploma() {
+function dpa() {
   textSize(25);
   fill(0);
-  text('Diploma: ', 20, 40);
+  text('Diploma: ' + diplomas, 20, 40);
 
-  // if(dist(char.x, char.y, s.x, s.y) <= (char.r + s.r) / 2) {
-  //   diplomas ++;
-  //
-  // }
 }
 
 function gameOver() {
@@ -231,16 +263,4 @@ function gameOver() {
 
 function win() {
 
-}
-
-function keyPressed() {
-  if (key == " ") {
-    char.jump();
-  }
-  if (key == 'r') {
-    state = 'titlePage';
-  }
-  // if (keyIsDown(83)) {
-  //   char.direction = 'still';
-  // }
 }

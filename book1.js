@@ -1,9 +1,9 @@
-class Subject {
+class Book1 {
   constructor() {
-    this.r = 70;
+    this.r = 80;
     this.x = w;
     this.y = h - this.r;
-    this.speed = random(5, 10);
+    this.speed = random(3, 7);
     this.img = books;
     // this.speed = 15;
   }
@@ -19,6 +19,5 @@ class Subject {
     // let rbook = Math.floor(Math.random() * books.length);
     // image(books[rbook], this.x, this.y, this.r, this.r);
     image(books[1], this.x, this.y, this.r, this.r);
-    image(books[1], this.x + 1000, this.y, this.r, this.r);
   }
 }
