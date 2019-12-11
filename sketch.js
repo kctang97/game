@@ -291,5 +291,5 @@ function win() {
   fill(random(100, 150),random(100, 150), random(100, 150));
   textStyle(BOLD);
   textSize(120);
-  text("Congradulation", 120, 240);
+  text("Congratulation", 120, 240);
 }
