@@ -15,7 +15,7 @@ body {
 /* sets canvas to be aligned to top right of screen
 position absolute will stop it from scrolling */
 canvas {
-  margin: auto auto auto auto;
+  margin: CETER;
   border-style: solid;
   border-width: 10px;
   border-color: #8C2106;
