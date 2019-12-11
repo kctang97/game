@@ -1,42 +1,30 @@
 'use strict';
 
-// pseudocode
-//  -- Tang
-
-
-// declare variables for:
-// game state
-// energy measurement
 let char, charImg;
 let state = 'titlePage';
 let cnv;
-let books = [];
-let books0, books1, books2, books3, books4, dpls;
+let books0, books1, books3, dpls;
 let cloud, bg;
 let book1 = [];
 let book2 = [];
+let book3 = [];
 let lf = 0;
 let rt;
 let cSpeed = 0.5;
+let rSpeed = 0.1;
 let w = 1024;
 let h = 760;
 let diplomas = [];
 let points = 0;
-// let life = 3;
-
-// let descKeyRelease = false;
+let jump, ps;
 
 function preload() {
-  //display 1 random book from the list
-  for(let i = 0; i < 5; i++) {
-    books[i] = loadImage("asset/subject/book" + i + ".png");
-  }
-
+  soundFormats('mp3', 'ogg');
+  jump = loadSound("asset/sound/jump.mp3");
+  ps = loadSound("asset/sound/point.mp3");
   charImg = createImg('asset/char/char.gif');
   books1 = loadImage('asset/subject/book1.png');
-  books2 = loadImage('asset/subject/book2.png');
   books3 = loadImage('asset/subject/book3.png');
-  books4 = loadImage('asset/subject/book4.png');
   books0 = loadImage('asset/subject/book0.png');
   cloud = loadImage('asset/subject/cloud1.png');
   dpls = loadImage('asset/subject/diploma.png');
@@ -50,6 +38,7 @@ function setup() {
 }
 
 function draw() {
+  // ms.play();
   switch (state) {
     case 'titlePage':
       titlePage();
@@ -93,6 +82,7 @@ function draw() {
 
 function keyPressed() {
   switch (state) {
+
     case 'titlePage':
       if (keyCode === ENTER) {
         state = 'description';
@@ -154,20 +144,16 @@ function description() {
   text("|  A  | : Move Left", 90, 350);
   text("|  D  | : Move Right", 90, 390);
   //books
-  image(books1, 500, 110, 100, 100);
+  image(books1, 500, 90, 150, 150);
   fill(0);
   textSize(30);
-  text(" * English Book *", 600, 170);
+  text(" * English Book *", 630, 170);
 
-  image(books3, 500, 200, 100, 100);
+  image(books3, 500, 190, 150, 150);
   fill(0);
   textSize(30);
-  text(" * Math Book *", 600, 260);
+  text(" * Math Book *", 630, 280);
 
-  image(books0, 500, 320, 100, 100);
-  fill(0);
-  textSize(30);
-  text(" * School Works *", 600, 370);
   //statement
   textSize(20);
   text("Statement: ", 50, 500);
@@ -179,7 +165,7 @@ function description() {
   //epilepsy
   fill(random(0, 200), 150);
   textSize(32);
-  text("~Enter or Click~ to Continue", 600, 720);
+  text("~Enter or Click~ to Continue", 550, 720);
 }
 
 function game() {
@@ -188,10 +174,8 @@ function game() {
   road();
   c();
 
-
   //blocks / books
-  if (random(1) <= 0.005) {
-    // let rbooks = floor(random(0, books.length));
+  if (random(1) <= 0.01) {
     book1.push(new Book1());
   }
   //horizontal book1
@@ -200,21 +184,21 @@ function game() {
     book1[i].move();
   }
   for (let i = book1.length - 1; i >= 0; i--){
-    if(dist(char.x, char.y, book1[i].x, book1[i].y) <= (char.r + book1[i].r) / 3) {
+    if(dist(char.x, char.y, book1[i].x, book1[i].y) <= (char.r + book1[i].r) / 2) {
       state = 'game over';
     }
   }
  //book2
-  if (random(1) <= 0.001) {
+  if (random(1) <= 0.006) {
     // let rbooks = floor(random(0, books.length));
-    book1.push(new Book2());
+    book2.push(new Book2());
   }
   for (let i = 0; i < book2.length; i++) {
     book2[i].show();
     book2[i].move();
   }
   for (let i = book2.length - 1; i >= 0; i--){
-    if(dist(char.x, char.y, book2[i].x, book2[i].y) <= (char.r + book2[i].r) / 3) {
+    if(dist(char.x, char.y, book2[i].x, book2[i].y) <= (char.r + book2[i].r) / 2) {
       state = 'game over';
     }
   }
@@ -232,8 +216,8 @@ function road() {
   image(bg, lf, 0, w, h);
   image(bg, rt, 0, w, h);
 
-  lf -= cSpeed;
-  rt -= cSpeed;
+  lf -= rSpeed;
+  rt -= rSpeed;
 
   if(lf < -w) {
     lf = w;
@@ -275,11 +259,14 @@ function dpa() {
   for (let i = diplomas.length - 1; i >= 0; i--){
     if(dist(char.x, char.y, diplomas[i].x, diplomas[i].y) <= (char.r + diplomas[i].r) / 2) {
       points++;
+      ps.play();
+      diplomas.splice(i, 1);
+    } else if (diplomas[i].y > h) {
       diplomas.splice(i, 1);
     }
   }
 
-  if (points > 5){
+  if (points >= 5){
     state = 'win';
   }
 }
@@ -300,8 +287,9 @@ function gameOver() {
 }
 
 function win() {
-  fill(random(180, 255),random(180, 255), random(180, 255), 50);
+  background(random(180, 255),random(180, 255), random(180, 255));
+  fill(random(100, 150),random(100, 150), random(100, 150));
   textStyle(BOLD);
   textSize(120);
-  text("Congradulation", 130, 240);
+  text("Congradulation", 120, 240);
 }

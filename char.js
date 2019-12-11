@@ -11,6 +11,7 @@ class Char {
   jump() {
     if (this.y == h - this.r){
         this.v = -20;
+        jump.play();
     }
   }
 
