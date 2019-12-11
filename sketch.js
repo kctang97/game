@@ -11,7 +11,7 @@ let book3 = [];
 let lf = 0;
 let rt;
 let cSpeed = 0.5;
-let rSpeed = 0.1;
+let rSpeed = 1.5;
 let w = 1024;
 let h = 760;
 let diplomas = [];
@@ -175,7 +175,7 @@ function game() {
   c();
 
   //blocks / books
-  if (random(1) <= 0.01) {
+  if (random(1) <= 0.009) {
     book1.push(new Book1());
   }
   //horizontal book1
@@ -184,7 +184,7 @@ function game() {
     book1[i].move();
   }
   for (let i = book1.length - 1; i >= 0; i--){
-    if(dist(char.x, char.y, book1[i].x, book1[i].y) <= (char.r + book1[i].r) / 2) {
+    if(dist(char.x, char.y, book1[i].x, book1[i].y) <= (char.r + book1[i].r) / 3) {
       state = 'game over';
     }
   }
@@ -198,7 +198,7 @@ function game() {
     book2[i].move();
   }
   for (let i = book2.length - 1; i >= 0; i--){
-    if(dist(char.x, char.y, book2[i].x, book2[i].y) <= (char.r + book2[i].r) / 2) {
+    if(dist(char.x, char.y, book2[i].x, book2[i].y) <= (char.r + book2[i].r) / 3) {
       state = 'game over';
     }
   }
@@ -249,7 +249,7 @@ function dpa() {
   text(`Dipolmas: ${points}`, 20, 40);
 
   // //verticle diplomas
-  if (random(1) <= 0.002) {
+  if (random(1) <= 0.003) {
     diplomas.push(new Diploma());
   }
   for (let i = 0; i < diplomas.length; i++) {
