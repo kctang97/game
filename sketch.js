@@ -13,7 +13,7 @@ let rt;
 let cSpeed = 0.5;
 let rSpeed = 1.5;
 let w = 1024;
-let h = 760;
+let h = 740;
 let diplomas = [];
 let points = 0;
 let jump, ps, die, congrat;
