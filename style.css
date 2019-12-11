@@ -4,8 +4,8 @@ html {
 }
 
 body {
-  margin: 50px auto;
-  padding: 50px;
+  margin: auto;
+  padding: 10px;
   font-family: "Lucida Console", Monaco, monospace;
 
   /* line-height: 1.5; */
