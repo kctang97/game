@@ -3,7 +3,7 @@
 let char, charImg, graduate;
 let state = 'titlePage';
 let cnv;
-let books0, books1, books3, dpls, city;
+let books1, books3, dpls, city;
 let cloud, bg;
 let book1 = [];
 let book2 = [];
@@ -16,20 +16,23 @@ let w = 1024;
 let h = 760;
 let diplomas = [];
 let points = 0;
-let jump, ps, die, congrat;
+let jump, ps, die, congrat, ms;
 
 function preload() {
+  //sound
   soundFormats('mp3', 'ogg');
+  ms = loadSound("asset/sound/titlemus.mp3");
   jump = loadSound("asset/sound/jump.mp3");
   ps = loadSound("asset/sound/point.mp3");
   die = loadSound("asset/sound/die.mp3");
   congrat = loadSound('asset/sound/congrat.mp3');
+
+  //image
   city = loadImage('asset/bg/city.png');
   charImg = createImg('asset/char/char.gif');
   graduate = loadImage('asset/char/graduate.png');
   books1 = loadImage('asset/subject/book1.png');
   books3 = loadImage('asset/subject/book3.png');
-  books0 = loadImage('asset/subject/book0.png');
   cloud = loadImage('asset/subject/cloud1.png');
   dpls = loadImage('asset/subject/diploma.png');
   bg = loadImage('asset/bg/road.png');
@@ -42,12 +45,12 @@ function setup() {
 }
 
 function draw() {
-  // ms.play();
   switch (state) {
     case 'titlePage':
       titlePage();
       cnv.mouseClicked(function(){
         state = 'description';
+        ms.stop();
       });
       break;
     case 'description':
@@ -85,10 +88,15 @@ function draw() {
   }
 }
 
+function loaded(){
+  ms.play();
+}
+
 function keyPressed() {
   switch (state) {
     case 'titlePage':
       if (keyCode === ENTER) {
+        ms.stop();
         state = 'description';
       }
       break;
