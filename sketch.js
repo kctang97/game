@@ -11,7 +11,7 @@ let char, charImg;
 let state = 'titlePage';
 let cnv;
 let books = [];
-let books0, books1, books2, books3, books4;
+let books0, books1, books2, books3, books4, dpls;
 let cloud;
 let book1 = [];
 let book2 = [];
@@ -21,6 +21,7 @@ let cSpeed = 0.5;
 let w = 1024;
 let h = 760;
 let diplomas = [];
+let points = 0;
 // let life = 3;
 
 // let descKeyRelease = false;
@@ -38,6 +39,7 @@ function preload() {
   books4 = loadImage('asset/subject/book4.png');
   books0 = loadImage('asset/subject/book0.png');
   cloud = loadImage('asset/subject/cloud1.png');
+  dpls = loadImage('asset/subject/diploma.png');
 }
 
 function setup() {
@@ -59,13 +61,25 @@ function draw() {
       cnv.mouseClicked(function(){
         state = 'game';
       });
-
       break;
     case 'game':
       game();
       break;
     case 'game over':
+      book1 = [];
+      book2 = [];
+      diplomas = [];
+      points = 0;
+      if (key == 'r') {
+        state = 'titlePage';
+      }
       gameOver();
+      break;
+    case 'win':
+      book1 = [];
+      book2 = [];
+      diplomas = [];
+      win();
       break;
     default:
       break;
@@ -92,6 +106,8 @@ function keyPressed() {
     case 'game over':
       book1 = [];
       book2 = [];
+      diplomas = [];
+      points = 0;
       if (key == 'r') {
         state = 'titlePage';
       }
@@ -170,7 +186,7 @@ function game() {
 
 
   //blocks / books
-  if (random(1) <= 0.01) {
+  if (random(1) <= 0.005) {
     // let rbooks = floor(random(0, books.length));
     book1.push(new Book1());
   }
@@ -185,7 +201,7 @@ function game() {
     }
   }
  //book2
-  if (random(1) <= 0.002) {
+  if (random(1) <= 0.001) {
     // let rbooks = floor(random(0, books.length));
     book1.push(new Book2());
   }
@@ -198,29 +214,14 @@ function game() {
       state = 'game over';
     }
   }
-  // //verticle diplomas
-  if (random(1) <= 0.004) {
-    diplomas.push(new Diploma());
-  }
-  for (let i = 0; i < diplomas.length; i++) {
-    diplomas[i].move();
-    diplomas[i].display();
-  }
-  for (let i = diplomas.length - 1; i >= 0; i--){
-    if(dist(char.x, char.y, diplomas[i].x, diplomas[i].y) <= (char.r + diplomas[i].r) / 2) {
-      diplomas++;
-      diplomas.splice(i, 1);
-    }
-  }
+
+
+  dpa();
   //character
   char.show();
   char.move();
   //distance
 
-}
-
-function pause() {
-  //pause the game
 }
 
 function c() {
@@ -242,8 +243,26 @@ function c() {
 function dpa() {
   textSize(25);
   fill(0);
-  text('Diploma: ' + diplomas, 20, 40);
+  text(`Dipolmas: ${points}`, 20, 40);
 
+  // //verticle diplomas
+  if (random(1) <= 0.004) {
+    diplomas.push(new Diploma());
+  }
+  for (let i = 0; i < diplomas.length; i++) {
+    diplomas[i].move();
+    diplomas[i].display();
+  }
+  for (let i = diplomas.length - 1; i >= 0; i--){
+    if(dist(char.x, char.y, diplomas[i].x, diplomas[i].y) <= (char.r + diplomas[i].r) / 2) {
+      points++;
+      diplomas.splice(i, 1);
+    }
+  }
+
+  if (points > 5){
+    state = 'win';
+  }
 }
 
 function gameOver() {
@@ -256,11 +275,14 @@ function gameOver() {
   text("Dropped Out !", 140, 250);
   fill(200);
   textSize(30)
-  text("F5 to Restart", 400, 350);
+  text(" R to Restart", 400, 350);
 
   //hit the book for certain amount
 }
 
 function win() {
-
+  fill(random(180, 255),random(180, 255), random(180, 255), 50);
+  textStyle(BOLD);
+  textSize(120);
+  text("Congradulation", 130, 240);
 }

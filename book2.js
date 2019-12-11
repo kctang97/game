@@ -8,7 +8,7 @@ class Book2 {
     // this.speed = 15;
   }
   move() {
-    this.x -= this.speed;;
+    this.x -= this.speed;
   }
   show() {
     image(books[2], this.x, this.y, this.r, this.r);
