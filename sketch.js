@@ -119,6 +119,8 @@ function keyPressed() {
       points = 0;
       if (key == 'r') {
         die.stop();
+        // book1.splice(i,1);
+        // book2.splice(i,1);
         state = 'game';
       }
       if (keyCode == ESCAPE) {
@@ -213,6 +215,8 @@ function game() {
   for (let i = book1.length - 1; i >= 0; i--){
     if(dist(char.x, char.y, book1[i].x, book1[i].y) <= (char.r + book1[i].r) / 3) {
       die.play();
+      book1.splice(i,1);
+      console.log("book1 gone");
       state = 'game over';
     }
   }
@@ -228,6 +232,8 @@ function game() {
   for (let i = book2.length - 1; i >= 0; i--){
     if(dist(char.x, char.y, book2[i].x, book2[i].y) <= (char.r + book2[i].r) / 3) {
       die.play();
+      book2.splice(i, 1);
+      console.log("book2 gone");
       state = 'game over';
     }
   }
