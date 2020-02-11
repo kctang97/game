@@ -119,8 +119,6 @@ function keyPressed() {
       points = 0;
       if (key == 'r') {
         die.stop();
-        // book1.splice(i,1);
-        // book2.splice(i,1);
         state = 'game';
       }
       if (keyCode == ESCAPE) {
